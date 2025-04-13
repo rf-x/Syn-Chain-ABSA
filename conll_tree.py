@@ -1,6 +1,5 @@
 import spacy
 
-
 def spacy_result_to_conll(sentence):
     nlp = spacy.load("en_core_web_sm-3.7.1")
     doc = nlp(sentence)
