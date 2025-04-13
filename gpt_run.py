@@ -197,11 +197,9 @@ def process_text_data(data, save_dir):
 
         final_data.extend(batch_data)
 
-    # 保存最终数据到主文件
     final_filepath = os.path.join(save_dir, "gpt35_res.json")
     write_json(final_filepath, final_data)
 
-    # 删除临时文件
     for i in tqdm(range(0, len(data), batch_size), desc="Cleaning up"):
         temp_filename = f'temp_data_file_{i // batch_size}.json'
         temp_filepath = os.path.join(save_dir, temp_filename)
