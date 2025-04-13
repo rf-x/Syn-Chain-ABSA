@@ -177,21 +177,18 @@ def get_completion(text):
 
 
 def process_text_data(data, save_dir):
-    batch_size = 100  # 定义批次大小
+    batch_size = 100  
     for i in range(0, len(data), batch_size):
         batch_data = data[i:i + batch_size]
-        # 处理每个批次的数据
-        output_data = []  # 保存处理后的数据
+        output_data = [] 
         for text in tqdm(batch_data, total=len(batch_data), desc=f"Processing data {i + 1}-{i + 1 + batch_size}:"):
             output_entry = get_completion(text)
             output_data.append(output_entry)
 
-        # 将处理后的数据添加到临时文件中
         temp_filename = f'temp_data_file_{i // batch_size}.json'
         temp_filepath = os.path.join(save_dir, temp_filename)
         write_json(temp_filepath, output_data)
 
-    # 合并所有临时文件到最终文件
     final_data = []
     for i in tqdm(range(0, len(data), batch_size), desc="Merging data"):
         temp_filename = f'temp_data_file_{i // batch_size}.json'
